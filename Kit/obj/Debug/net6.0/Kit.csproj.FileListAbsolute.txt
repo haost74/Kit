@@ -1,0 +1,16 @@
+C:\Users\haost\source\repos\Kit\Kit\bin\Debug\net6.0\Kit.exe
+C:\Users\haost\source\repos\Kit\Kit\bin\Debug\net6.0\all_Ip.txt.txt
+C:\Users\haost\source\repos\Kit\Kit\bin\Debug\net6.0\Kit.deps.json
+C:\Users\haost\source\repos\Kit\Kit\bin\Debug\net6.0\Kit.runtimeconfig.json
+C:\Users\haost\source\repos\Kit\Kit\bin\Debug\net6.0\Kit.dll
+C:\Users\haost\source\repos\Kit\Kit\bin\Debug\net6.0\ref\Kit.dll
+C:\Users\haost\source\repos\Kit\Kit\bin\Debug\net6.0\Kit.pdb
+C:\Users\haost\source\repos\Kit\Kit\obj\Debug\net6.0\Kit.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\haost\source\repos\Kit\Kit\obj\Debug\net6.0\Kit.AssemblyInfoInputs.cache
+C:\Users\haost\source\repos\Kit\Kit\obj\Debug\net6.0\Kit.AssemblyInfo.cs
+C:\Users\haost\source\repos\Kit\Kit\obj\Debug\net6.0\Kit.csproj.CoreCompileInputs.cache
+C:\Users\haost\source\repos\Kit\Kit\obj\Debug\net6.0\Kit.dll
+C:\Users\haost\source\repos\Kit\Kit\obj\Debug\net6.0\ref\Kit.dll
+C:\Users\haost\source\repos\Kit\Kit\obj\Debug\net6.0\Kit.pdb
+C:\Users\haost\source\repos\Kit\Kit\obj\Debug\net6.0\Kit.genruntimeconfig.cache
+C:\Users\haost\source\repos\Kit\Kit\obj\Debug\net6.0\Kit.csproj.AssemblyReference.cache
