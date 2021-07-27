@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RgCPmkZram6/8+khTxUiFE42Wt8y98S19VzgZn6Jpj2/P/q2up8ZbsNPV1plsGGQz6EYdGFxur/Snfiv7dIcRw==",
+  "dgSpecHash": "ougjEZZBCPMZxubBXo2RGj2SfiWq/Jwi5T0FF8ipwmzw/jn5TxK35TcUS0Vp1on6XJk30RLKHui+1skauc4i4A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\haost\\source\\repos\\Kit\\Kit\\Kit.csproj",
+  "projectFilePath": "D:\\Kit\\Kit\\Kit.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\haost\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.1\\microsoft.netcore.platforms.1.1.1.nupkg.sha512",
     "C:\\Users\\haost\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\haost\\source\\repos\\Kit\\Kit\\Kit.csproj": {}
+    "D:\\Kit\\Kit\\Kit.csproj": {}
   },
   "projects": {
-    "C:\\Users\\haost\\source\\repos\\Kit\\Kit\\Kit.csproj": {
+    "D:\\Kit\\Kit\\Kit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\haost\\source\\repos\\Kit\\Kit\\Kit.csproj",
+        "projectUniqueName": "D:\\Kit\\Kit\\Kit.csproj",
         "projectName": "Kit",
-        "projectPath": "C:\\Users\\haost\\source\\repos\\Kit\\Kit\\Kit.csproj",
+        "projectPath": "D:\\Kit\\Kit\\Kit.csproj",
         "packagesPath": "C:\\Users\\haost\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\haost\\source\\repos\\Kit\\Kit\\obj\\",
+        "outputPath": "D:\\Kit\\Kit\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
