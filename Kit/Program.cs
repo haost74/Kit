@@ -1,14 +1,10 @@
-﻿using System;
+﻿using Kit.Convert;
+using Kit.src.IpAddress;
+using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.IO;
-using System.Data;
 using System.Runtime.InteropServices;
-using System.Drawing;
-using System.Reflection;
 using System.Text;
 
 namespace Kit
@@ -39,18 +35,50 @@ namespace Kit
 
         static void Main(string[] args)
         {
+            IpAddress ipAddress = new IpAddress();
+            ipAddress.Address = "0.124.47.91";
+            ipAddress.ID = 1000457;
+            var cd = Kit.Convert.Converter.SerializeObj(ipAddress);
 
 
 
+            return;
+            
+            //CreateIP cIp = new CreateIP();
+            //cIp.Creste(null);
+            BinarySave<List<IpAddress>> bs = new BinarySave<List<IpAddress>>();
+            //bs.Serialize(cIp.ipAddresses);
 
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
 
-            //BinarySave<List<Test>> bs = new BinarySave<List<Test>>();
-            //Test test = new Test();
-            //Test test1 = new Test() { DataStr = "123456789qwertyuiopasdfghjklzxcvbnm" };
-            //List<Test> list = new List<Test>();
-            //list.Add(test);
-            //list.Add(test1);
-            //bs.Serialize(list);
+            bs.Reader<IpAddress>(100000);
+
+            stopWatch.Stop();
+
+            TimeSpan ts = stopWatch.Elapsed;
+
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            Console.WriteLine("RunTime " + elapsedTime);
+
+            //AddTast();
+
+            Console.WriteLine("END");
+
+        }
+
+        private static void AddTast()
+        {
+            BinarySave<List<Test>> bs = new BinarySave<List<Test>>();
+            Test test = new Test();
+            Test test1 = new Test() { DataStr = "123456789qwertyuiopasdfghjklzxcvbnm" };
+            List<Test> list = new List<Test>();
+            list.Add(test);
+            list.Add(test1);
+            bs.Serialize(list);
             //return;
 
             //---------------------------------------------------------
@@ -62,10 +90,7 @@ namespace Kit
             //----------------------------------------------------------
 
             BinarySave<List<Test>> bsb = new BinarySave<List<Test>>();
-
-            bsb.Reader<Test>(1);
-
-
+            bsb.Reader<Test>(0);
         }
 
 
@@ -74,15 +99,15 @@ namespace Kit
             var type = obj.GetType();
             var all_p = type.GetProperties();
 
-            if(allbytes == null)
-             allbytes = new List<byte>();
-            if(size == null)
-             size = new List<int>();
+            if (allbytes == null)
+                allbytes = new List<byte>();
+            if (size == null)
+                size = new List<int>();
 
-            for(int i = 0; i < all_p.Length; ++i)
+            for (int i = 0; i < all_p.Length; ++i)
             {
                 var p = all_p[i];
-                if(p.GetIndexParameters().Length == 0)
+                if (p.GetIndexParameters().Length == 0)
                 {
                     //Console.WriteLine(p.GetValue(obj));
                     var name = p.PropertyType.Name;
@@ -91,9 +116,9 @@ namespace Kit
                     double dp = 0;
                     if (name == "String")
                     {
-                       buff =  Encoding.UTF8.GetBytes(Convert.ToString(p.GetValue(obj)));
+                        buff = Encoding.UTF8.GetBytes(System.Convert.ToString(p.GetValue(obj)));
                     }
-                    else if(double.TryParse(avl, out dp))
+                    else if (double.TryParse(avl, out dp))
                     {
                         buff = BitConverter.GetBytes(dp);
                         //if (BitConverter.IsLittleEndian)
@@ -104,7 +129,7 @@ namespace Kit
                     else
                     {
                         var tm = p.GetValue(obj);
-                        Serialize(tm,size, allbytes);
+                        Serialize(tm, size, allbytes);
                     }
                     if (buff != null)
                     {
@@ -120,7 +145,7 @@ namespace Kit
 
             File.WriteAllBytes(fileName, allbytes.ToArray());
             int z = 0;
-            foreach(var sz in size)
+            foreach (var sz in size)
             {
                 byte[] bytes = new byte[sz];
                 using (FileStream fs = new FileStream(fileName, FileMode.Open))

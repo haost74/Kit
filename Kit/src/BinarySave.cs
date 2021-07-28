@@ -63,16 +63,25 @@ namespace Kit
         {
             if (obj is IList && obj.GetType().IsGenericType)
             {
+                string fileName = "";
+
                 foreach (var el in (IEnumerable)obj)
                 {
+                    if(fileName == "")
+                    {
+                        var type = el.GetType();
+                        fileName = type.FullName + ".dat";
+                    }
                     SerealizeObj(el);
                 }
+
+                Save(fileName);
+
             }
             else
             {
                 SerealizeObj(obj);
             }
-
         }
 
         private void SerealizeObj<R>(R obj, bool isAdd = false)
@@ -93,7 +102,60 @@ namespace Kit
 
                 if (name == "String")
                 {
-                    buff = Encoding.UTF8.GetBytes(Convert.ToString(p.GetValue(obj)));
+                    buff = Encoding.UTF8.GetBytes(System.Convert.ToString(p.GetValue(obj)));
+                    mc.CellSize.Add(buff.Length);
+                    if (mc.CountField > mc.Types.Count)
+                        mc.Types.Add(name);
+                }
+                else if (double.TryParse(avl, out dp))
+                {
+                    buff = BitConverter.GetBytes(dp);
+                    mc.CellSize.Add(buff.Length);
+                    if (mc.CountField > mc.Types.Count)
+                        mc.Types.Add(name);
+                }
+                else
+                {
+
+                }
+
+                if (buff != null)
+                {
+                    mc.AllBytes.AddRange(buff);
+                }
+            }
+
+        }
+
+        public void Save(string fileName)
+        {
+            if (File.Exists(fileName)) File.Delete(fileName);
+            File.WriteAllBytes(fileName, mc.AllBytes.ToArray());
+            mc.AllSize = mc.CellSize.Sum(x => x);
+            mc.SerializeJson();
+        }
+
+        //----------------------------------------------------------------------------------
+
+        private void _SerealizeObj<R>(R obj, bool isAdd = false)
+        {
+            var type = obj.GetType();
+            var all_p = type.GetProperties();
+            string fileName = type.FullName + ".dat";
+            if (mc == null)
+                mc = new MetaClass(fileName);
+            mc.CountField = all_p.Length;
+            for (int i = 0; i < all_p.Length; ++i)
+            {
+                var p = all_p[i];
+                var name = p.PropertyType.Name;
+                byte[] buff = null;
+                var avl = p.GetValue(obj).ToString();
+                double dp = 0;
+
+                if (name == "String")
+                {
+                    buff = Encoding.UTF8.GetBytes(System.Convert.ToString(p.GetValue(obj)));
                     mc.CellSize.Add(buff.Length);
                     if (mc.CountField > mc.Types.Count)
                         mc.Types.Add(name);
@@ -142,7 +204,7 @@ namespace Kit
 
                 int x = mc.CountField; int y = mc.CountField;
 
-                var gdata = mc.CellSize.GroupBy(_ => x++ / y).Select(n => n.ToList());
+                var gdata = mc.CellSize.GroupBy(_ => x++ / y).Select(n => n.ToList()).ToList();
 
                 if (numType < gdata.Count())
                 {
@@ -152,7 +214,7 @@ namespace Kit
                     int sum = 0;
                     while (m < numType)
                     {
-                        sum += gdata.ElementAt(m).Sum();
+                        sum += gdata[m].Sum();
                         ++m;
                     }
 
@@ -200,7 +262,6 @@ namespace Kit
             }
 
         }
-
 
         private byte[] Frez(int strat, int step, byte[] arr)
         {
